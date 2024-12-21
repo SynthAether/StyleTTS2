@@ -113,7 +113,7 @@ class FilePathDataset(torch.utils.data.Dataset):
         
         acoustic_feature = mel_tensor.squeeze()
         length_feature = acoustic_feature.size(1)
-        acoustic_feature = acoustic_feature[:, :(length_feature - length_feature % 2)]
+        acoustic_feature = acoustic_feature[:, :(length_feature - length_feature % 2)]  # Make length of mels an even number
         
         # get reference sample
         ref_data = (self.df[self.df[2] == str(speaker_id)]).sample(n=1).iloc[0].tolist()

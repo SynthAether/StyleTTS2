@@ -66,7 +66,8 @@ def main(config_path):
     saving_epoch = config.get('save_freq', 2)
     
     data_params = config.get('data_params', None)
-    sr = config['preprocess_params'].get('sr', 24000)
+    sr = config['preprocess_params'].get('sr', 22050)
+    hop_length = config['preprocess_params']['spect_params']['hop_length']
     train_path = data_params['train_data']
     val_path = data_params['val_data']
     root_path = data_params['root_path']
@@ -229,7 +230,7 @@ def main(config_path):
                 en.append(asr[bib, :, random_start:random_start+mel_len])
                 gt.append(mels[bib, :, (random_start * 2):((random_start+mel_len) * 2)])
 
-                y = waves[bib][(random_start * 2) * 300:((random_start+mel_len) * 2) * 300]
+                y = waves[bib][(random_start * 2) * hop_length:((random_start+mel_len) * 2) * hop_length]
                 wav.append(torch.from_numpy(y).to(device))
                 
                 # style reference (better to be different from the GT)
@@ -367,7 +368,7 @@ def main(config_path):
                     random_start = np.random.randint(0, mel_length - mel_len)
                     en.append(asr[bib, :, random_start:random_start+mel_len])
                     gt.append(mels[bib, :, (random_start * 2):((random_start+mel_len) * 2)])
-                    y = waves[bib][(random_start * 2) * 300:((random_start+mel_len) * 2) * 300]
+                    y = waves[bib][(random_start * 2) * hop_length:((random_start+mel_len) * 2) * hop_length]
                     wav.append(torch.from_numpy(y).to('cuda'))
 
                 wav = torch.stack(wav).float().detach()

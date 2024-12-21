@@ -217,10 +217,10 @@ class Collater(object):
         waves = [None for _ in range(batch_size)]
 
         '''
-        label        = speaker_id --------+ This is the speaker ID of "acoustic_feature" and "text_tensor"
+        label        = speaker_id --------+  This is the speaker ID of "acoustic_feature" and "text_tensor"
         mel          = acoustic_feature   |
         text         = text_tensor -------+
-        ref_text     = ref_text <- random text from Out-of-Domain text data
+        ref_text     = ref_text <----------  Random text entry from Out-of-Domain text data
         ref_mel      = ref_mel_tensor ----+
         ref_label    = ref_label ---------+  This is the speaker ID of "ref_mel_tensor"
         path         = path 

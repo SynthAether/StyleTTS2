@@ -241,7 +241,7 @@ class Collater(object):
             ref_mel_size = ref_mel.size(1)
             ref_mels[bid, :, :ref_mel_size] = ref_mel
             
-            ref_labels[bid] = ref_label
+            ref_labels[bid] = ref_label   # ref_label should be identical to label, indicating same speaker ID for mels and ref_mels
             waves[bid] = wave
 
         return waves, texts, input_lengths, ref_texts, ref_lengths, mels, output_lengths, ref_mels

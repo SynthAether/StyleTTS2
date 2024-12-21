@@ -128,7 +128,12 @@ class FilePathDataset(torch.utils.data.Dataset):
         while len(ps) < self.min_length:
             rand_idx = np.random.randint(0, len(self.ptexts) - 1)   # Ensure the selected text meets the minimum length requirement by picking a random text
             ps = self.ptexts[rand_idx]
-            
+            # @todo: Ensure the randomly picked reference text matches the target speaker for consistency
+            # Filter texts by speaker_id
+            # speaker_texts = [t for t in self.ptexts if t.split('|')[1] == str(speaker_id)]
+            # rand_idx = np.random.randint(0, len(speaker_texts) - 1)
+            # ps = speaker_texts[rand_idx]
+
             text = self.text_cleaner(ps)
             text.insert(0, 0)
             text.append(0)

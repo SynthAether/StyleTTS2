@@ -183,6 +183,14 @@ def main(config_path):
             batch = [b.to(device) for b in batch[1:]]
             '''
             texts, input_lengths, ref_texts, ref_lengths, mels, output_lengths  , ref_mels   = batch[1:]
+
+            "input_lengths" is length of input "texts"
+            "output_lengths" is length of "mels"
+            
+            "ref_texts" and "ref_lengths" refer to Out-of-Domain text
+
+            "ref_mels" is another randomly picked mel-spectrogram from the training data but from the same speaker_ID as "mels", no text is provided and is not related to "ref_texts"
+            
             '''
             texts, input_lengths,         _,           _, mels, mel_input_length, _          = batch
             

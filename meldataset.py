@@ -126,7 +126,7 @@ class FilePathDataset(torch.utils.data.Dataset):
         
         # Ensure the selected text meets the minimum length requirement, but not related the indexed sample acoustic_feature and text_tensor
         while len(ps) < self.min_length:
-            rand_idx = np.random.randint(0, len(self.ptexts) - 1)
+            rand_idx = np.random.randint(0, len(self.ptexts) - 1)   # Ensure the selected text meets the minimum length requirement by picking a random text
             ps = self.ptexts[rand_idx]
             
             text = self.text_cleaner(ps)

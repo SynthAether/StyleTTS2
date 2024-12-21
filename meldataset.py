@@ -72,7 +72,7 @@ class FilePathDataset(torch.utils.data.Dataset):
                  sr=22050,
                  data_augmentation=False,
                  validation=False,
-                 OOD_data="Data/OOD_texts.txt",
+                 OOD_data="Data/OOD_texts.txt", # Out-of-Domain text
                  min_length=50,
                  ):
 
@@ -93,6 +93,7 @@ class FilePathDataset(torch.utils.data.Dataset):
         self.max_mel_length = 192
         
         self.min_length = min_length
+        # Out-of-Domain text
         with open(OOD_data, 'r', encoding='utf-8') as f:
             tl = f.readlines()
         idx = 1 if '.wav' in tl[0].split('|')[0] else 0
@@ -120,7 +121,7 @@ class FilePathDataset(torch.utils.data.Dataset):
         ref_data = (self.df[self.df[2] == str(speaker_id)]).sample(n=1).iloc[0].tolist()
         ref_mel_tensor, ref_label = self._load_data(ref_data[:3])
         
-        # get OOD text
+        # get OOD text, i.e. Out-of-Domain text
         
         ps = ""
         

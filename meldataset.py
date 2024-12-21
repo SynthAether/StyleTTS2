@@ -116,6 +116,7 @@ class FilePathDataset(torch.utils.data.Dataset):
         acoustic_feature = acoustic_feature[:, :(length_feature - length_feature % 2)]  # Make length of mels an even number
         
         # get reference sample
+        # Randomly select one row from the dataframe where the speaker_id matches and convert it to a list
         ref_data = (self.df[self.df[2] == str(speaker_id)]).sample(n=1).iloc[0].tolist()
         ref_mel_tensor, ref_label = self._load_data(ref_data[:3])
         

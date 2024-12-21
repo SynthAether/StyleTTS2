@@ -121,7 +121,7 @@ class FilePathDataset(torch.utils.data.Dataset):
         ref_data = (self.df[self.df[2] == str(speaker_id)]).sample(n=1).iloc[0].tolist()
         ref_mel_tensor, ref_label = self._load_data(ref_data[:3])
         
-        # get OOD text, i.e. Out-of-Domain text
+        # get OOD text, i.e. ptexts holds Out-of-Domain text, totally separate from 'data'
         
         ps = ""
         

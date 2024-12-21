@@ -214,7 +214,17 @@ class Collater(object):
         ref_labels = torch.zeros((batch_size)).long()
         paths = ['' for _ in range(batch_size)]
         waves = [None for _ in range(batch_size)]
-        
+
+        '''
+        label        = speaker_id
+        mel          = acoustic_feature
+        text         = text_tensor
+        ref_text     = ref_text
+        ref_mel      = ref_mel_tensor
+        ref_label    = ref_label
+        path         = path 
+        wave         = wave
+        '''
         for bid, (label, mel, text, ref_text, ref_mel, ref_label, path, wave) in enumerate(batch):
             mel_size = mel.size(1)
             text_size = text.size(0)
